@@ -1,0 +1,544 @@
+2023-07-18 09:03:34,482 - ERROR - {"timestamp": "2023-07-18 09:03:34", "route": "/login", "error": "(psycopg2.errors.UndefinedColumn) column users.profile_picture does not exist\nLINE 1: ... AS users_active, users.api_key AS users_api_key, users.prof...\n                                                             ^\n\n[SQL: SELECT users.id AS users_id, users.username AS users_username, users.email AS users_email, users.phone_number AS users_phone_number, users.phone_number_verified AS users_phone_number_verified, users.email_verified AS users_email_verified, users.hashed_password AS users_hashed_password, users.salt AS users_salt, users.is_admin AS users_is_admin, users.created_at AS users_created_at, users.global_banned AS users_global_banned, users.role AS users_role, users.active AS users_active, users.api_key AS users_api_key, users.profile_picture AS users_profile_picture \nFROM users \nWHERE users.email = %(email_1)s \n LIMIT %(param_1)s]\n[parameters: {'email_1': 'bdd010d01b37fcbf97e2348b546dd8b7da7677797f70d0a51b9ecb3990e592bf', 'param_1': 1}]\n(Background on this error at: https://sqlalche.me/e/20/f405)"}
+Traceback (most recent call last):
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1968, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 920, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.UndefinedColumn: column users.profile_picture does not exist
+LINE 1: ... AS users_active, users.api_key AS users_api_key, users.prof...
+                                                             ^
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/jaylen/Projects/IcyNetwork/server/app/api/tools/utils.py", line 81, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/server/app/api/tools/utils.py", line 105, in decorated_function
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/server/app/api/routes.py", line 82, in login
+    user = User.query.filter_by(email=email_hash).first()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/orm/query.py", line 2747, in first
+    return self.limit(1)._iter().first()  # type: ignore
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/orm/query.py", line 2846, in _iter
+    result: Union[ScalarResult[_T], Result[_T]] = self.session.execute(
+                                                  ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2232, in execute
+    return self._execute_internal(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2127, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/orm/context.py", line 293, in orm_execute_statement
+    result = conn.execute(
+             ^^^^^^^^^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1413, in execute
+    return meth(
+           ^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/sql/elements.py", line 483, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1637, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1987, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 2344, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1968, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 920, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.ProgrammingError: (psycopg2.errors.UndefinedColumn) column users.profile_picture does not exist
+LINE 1: ... AS users_active, users.api_key AS users_api_key, users.prof...
+                                                             ^
+
+[SQL: SELECT users.id AS users_id, users.username AS users_username, users.email AS users_email, users.phone_number AS users_phone_number, users.phone_number_verified AS users_phone_number_verified, users.email_verified AS users_email_verified, users.hashed_password AS users_hashed_password, users.salt AS users_salt, users.is_admin AS users_is_admin, users.created_at AS users_created_at, users.global_banned AS users_global_banned, users.role AS users_role, users.active AS users_active, users.api_key AS users_api_key, users.profile_picture AS users_profile_picture 
+FROM users 
+WHERE users.email = %(email_1)s 
+ LIMIT %(param_1)s]
+[parameters: {'email_1': 'bdd010d01b37fcbf97e2348b546dd8b7da7677797f70d0a51b9ecb3990e592bf', 'param_1': 1}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2023-07-18 09:03:36,580 - ERROR - {"timestamp": "2023-07-18 09:03:36", "route": "/login", "error": "(psycopg2.errors.UndefinedColumn) column users.profile_picture does not exist\nLINE 1: ... AS users_active, users.api_key AS users_api_key, users.prof...\n                                                             ^\n\n[SQL: SELECT users.id AS users_id, users.username AS users_username, users.email AS users_email, users.phone_number AS users_phone_number, users.phone_number_verified AS users_phone_number_verified, users.email_verified AS users_email_verified, users.hashed_password AS users_hashed_password, users.salt AS users_salt, users.is_admin AS users_is_admin, users.created_at AS users_created_at, users.global_banned AS users_global_banned, users.role AS users_role, users.active AS users_active, users.api_key AS users_api_key, users.profile_picture AS users_profile_picture \nFROM users \nWHERE users.email = %(email_1)s \n LIMIT %(param_1)s]\n[parameters: {'email_1': 'bdd010d01b37fcbf97e2348b546dd8b7da7677797f70d0a51b9ecb3990e592bf', 'param_1': 1}]\n(Background on this error at: https://sqlalche.me/e/20/f405)"}
+Traceback (most recent call last):
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1968, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 920, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.UndefinedColumn: column users.profile_picture does not exist
+LINE 1: ... AS users_active, users.api_key AS users_api_key, users.prof...
+                                                             ^
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/jaylen/Projects/IcyNetwork/server/app/api/tools/utils.py", line 81, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/server/app/api/tools/utils.py", line 105, in decorated_function
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/server/app/api/routes.py", line 82, in login
+    user = User.query.filter_by(email=email_hash).first()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/orm/query.py", line 2747, in first
+    return self.limit(1)._iter().first()  # type: ignore
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/orm/query.py", line 2846, in _iter
+    result: Union[ScalarResult[_T], Result[_T]] = self.session.execute(
+                                                  ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2232, in execute
+    return self._execute_internal(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2127, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/orm/context.py", line 293, in orm_execute_statement
+    result = conn.execute(
+             ^^^^^^^^^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1413, in execute
+    return meth(
+           ^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/sql/elements.py", line 483, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1637, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1987, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 2344, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1968, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 920, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.ProgrammingError: (psycopg2.errors.UndefinedColumn) column users.profile_picture does not exist
+LINE 1: ... AS users_active, users.api_key AS users_api_key, users.prof...
+                                                             ^
+
+[SQL: SELECT users.id AS users_id, users.username AS users_username, users.email AS users_email, users.phone_number AS users_phone_number, users.phone_number_verified AS users_phone_number_verified, users.email_verified AS users_email_verified, users.hashed_password AS users_hashed_password, users.salt AS users_salt, users.is_admin AS users_is_admin, users.created_at AS users_created_at, users.global_banned AS users_global_banned, users.role AS users_role, users.active AS users_active, users.api_key AS users_api_key, users.profile_picture AS users_profile_picture 
+FROM users 
+WHERE users.email = %(email_1)s 
+ LIMIT %(param_1)s]
+[parameters: {'email_1': 'bdd010d01b37fcbf97e2348b546dd8b7da7677797f70d0a51b9ecb3990e592bf', 'param_1': 1}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2023-07-18 09:03:38,044 - ERROR - {"timestamp": "2023-07-18 09:03:38", "route": "/login", "error": "(psycopg2.errors.UndefinedColumn) column users.profile_picture does not exist\nLINE 1: ... AS users_active, users.api_key AS users_api_key, users.prof...\n                                                             ^\n\n[SQL: SELECT users.id AS users_id, users.username AS users_username, users.email AS users_email, users.phone_number AS users_phone_number, users.phone_number_verified AS users_phone_number_verified, users.email_verified AS users_email_verified, users.hashed_password AS users_hashed_password, users.salt AS users_salt, users.is_admin AS users_is_admin, users.created_at AS users_created_at, users.global_banned AS users_global_banned, users.role AS users_role, users.active AS users_active, users.api_key AS users_api_key, users.profile_picture AS users_profile_picture \nFROM users \nWHERE users.email = %(email_1)s \n LIMIT %(param_1)s]\n[parameters: {'email_1': 'bdd010d01b37fcbf97e2348b546dd8b7da7677797f70d0a51b9ecb3990e592bf', 'param_1': 1}]\n(Background on this error at: https://sqlalche.me/e/20/f405)"}
+Traceback (most recent call last):
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1968, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 920, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.UndefinedColumn: column users.profile_picture does not exist
+LINE 1: ... AS users_active, users.api_key AS users_api_key, users.prof...
+                                                             ^
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/jaylen/Projects/IcyNetwork/server/app/api/tools/utils.py", line 81, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/server/app/api/tools/utils.py", line 105, in decorated_function
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/server/app/api/routes.py", line 82, in login
+    user = User.query.filter_by(email=email_hash).first()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/orm/query.py", line 2747, in first
+    return self.limit(1)._iter().first()  # type: ignore
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/orm/query.py", line 2846, in _iter
+    result: Union[ScalarResult[_T], Result[_T]] = self.session.execute(
+                                                  ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2232, in execute
+    return self._execute_internal(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2127, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/orm/context.py", line 293, in orm_execute_statement
+    result = conn.execute(
+             ^^^^^^^^^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1413, in execute
+    return meth(
+           ^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/sql/elements.py", line 483, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1637, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1987, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 2344, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1968, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 920, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.ProgrammingError: (psycopg2.errors.UndefinedColumn) column users.profile_picture does not exist
+LINE 1: ... AS users_active, users.api_key AS users_api_key, users.prof...
+                                                             ^
+
+[SQL: SELECT users.id AS users_id, users.username AS users_username, users.email AS users_email, users.phone_number AS users_phone_number, users.phone_number_verified AS users_phone_number_verified, users.email_verified AS users_email_verified, users.hashed_password AS users_hashed_password, users.salt AS users_salt, users.is_admin AS users_is_admin, users.created_at AS users_created_at, users.global_banned AS users_global_banned, users.role AS users_role, users.active AS users_active, users.api_key AS users_api_key, users.profile_picture AS users_profile_picture 
+FROM users 
+WHERE users.email = %(email_1)s 
+ LIMIT %(param_1)s]
+[parameters: {'email_1': 'bdd010d01b37fcbf97e2348b546dd8b7da7677797f70d0a51b9ecb3990e592bf', 'param_1': 1}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2023-07-18 09:03:38,181 - ERROR - {"timestamp": "2023-07-18 09:03:38", "route": "/login", "error": "(psycopg2.errors.UndefinedColumn) column users.profile_picture does not exist\nLINE 1: ... AS users_active, users.api_key AS users_api_key, users.prof...\n                                                             ^\n\n[SQL: SELECT users.id AS users_id, users.username AS users_username, users.email AS users_email, users.phone_number AS users_phone_number, users.phone_number_verified AS users_phone_number_verified, users.email_verified AS users_email_verified, users.hashed_password AS users_hashed_password, users.salt AS users_salt, users.is_admin AS users_is_admin, users.created_at AS users_created_at, users.global_banned AS users_global_banned, users.role AS users_role, users.active AS users_active, users.api_key AS users_api_key, users.profile_picture AS users_profile_picture \nFROM users \nWHERE users.email = %(email_1)s \n LIMIT %(param_1)s]\n[parameters: {'email_1': 'bdd010d01b37fcbf97e2348b546dd8b7da7677797f70d0a51b9ecb3990e592bf', 'param_1': 1}]\n(Background on this error at: https://sqlalche.me/e/20/f405)"}
+Traceback (most recent call last):
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1968, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 920, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.UndefinedColumn: column users.profile_picture does not exist
+LINE 1: ... AS users_active, users.api_key AS users_api_key, users.prof...
+                                                             ^
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/jaylen/Projects/IcyNetwork/server/app/api/tools/utils.py", line 81, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/server/app/api/tools/utils.py", line 105, in decorated_function
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/server/app/api/routes.py", line 82, in login
+    user = User.query.filter_by(email=email_hash).first()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/orm/query.py", line 2747, in first
+    return self.limit(1)._iter().first()  # type: ignore
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/orm/query.py", line 2846, in _iter
+    result: Union[ScalarResult[_T], Result[_T]] = self.session.execute(
+                                                  ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2232, in execute
+    return self._execute_internal(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2127, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/orm/context.py", line 293, in orm_execute_statement
+    result = conn.execute(
+             ^^^^^^^^^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1413, in execute
+    return meth(
+           ^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/sql/elements.py", line 483, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1637, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1987, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 2344, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1968, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 920, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.ProgrammingError: (psycopg2.errors.UndefinedColumn) column users.profile_picture does not exist
+LINE 1: ... AS users_active, users.api_key AS users_api_key, users.prof...
+                                                             ^
+
+[SQL: SELECT users.id AS users_id, users.username AS users_username, users.email AS users_email, users.phone_number AS users_phone_number, users.phone_number_verified AS users_phone_number_verified, users.email_verified AS users_email_verified, users.hashed_password AS users_hashed_password, users.salt AS users_salt, users.is_admin AS users_is_admin, users.created_at AS users_created_at, users.global_banned AS users_global_banned, users.role AS users_role, users.active AS users_active, users.api_key AS users_api_key, users.profile_picture AS users_profile_picture 
+FROM users 
+WHERE users.email = %(email_1)s 
+ LIMIT %(param_1)s]
+[parameters: {'email_1': 'bdd010d01b37fcbf97e2348b546dd8b7da7677797f70d0a51b9ecb3990e592bf', 'param_1': 1}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2023-07-18 09:03:38,297 - ERROR - {"timestamp": "2023-07-18 09:03:38", "route": "/login", "error": "(psycopg2.errors.UndefinedColumn) column users.profile_picture does not exist\nLINE 1: ... AS users_active, users.api_key AS users_api_key, users.prof...\n                                                             ^\n\n[SQL: SELECT users.id AS users_id, users.username AS users_username, users.email AS users_email, users.phone_number AS users_phone_number, users.phone_number_verified AS users_phone_number_verified, users.email_verified AS users_email_verified, users.hashed_password AS users_hashed_password, users.salt AS users_salt, users.is_admin AS users_is_admin, users.created_at AS users_created_at, users.global_banned AS users_global_banned, users.role AS users_role, users.active AS users_active, users.api_key AS users_api_key, users.profile_picture AS users_profile_picture \nFROM users \nWHERE users.email = %(email_1)s \n LIMIT %(param_1)s]\n[parameters: {'email_1': 'bdd010d01b37fcbf97e2348b546dd8b7da7677797f70d0a51b9ecb3990e592bf', 'param_1': 1}]\n(Background on this error at: https://sqlalche.me/e/20/f405)"}
+Traceback (most recent call last):
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1968, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 920, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.UndefinedColumn: column users.profile_picture does not exist
+LINE 1: ... AS users_active, users.api_key AS users_api_key, users.prof...
+                                                             ^
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/jaylen/Projects/IcyNetwork/server/app/api/tools/utils.py", line 81, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/server/app/api/tools/utils.py", line 105, in decorated_function
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/server/app/api/routes.py", line 82, in login
+    user = User.query.filter_by(email=email_hash).first()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/orm/query.py", line 2747, in first
+    return self.limit(1)._iter().first()  # type: ignore
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/orm/query.py", line 2846, in _iter
+    result: Union[ScalarResult[_T], Result[_T]] = self.session.execute(
+                                                  ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2232, in execute
+    return self._execute_internal(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2127, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/orm/context.py", line 293, in orm_execute_statement
+    result = conn.execute(
+             ^^^^^^^^^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1413, in execute
+    return meth(
+           ^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/sql/elements.py", line 483, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1637, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1987, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 2344, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1968, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 920, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.ProgrammingError: (psycopg2.errors.UndefinedColumn) column users.profile_picture does not exist
+LINE 1: ... AS users_active, users.api_key AS users_api_key, users.prof...
+                                                             ^
+
+[SQL: SELECT users.id AS users_id, users.username AS users_username, users.email AS users_email, users.phone_number AS users_phone_number, users.phone_number_verified AS users_phone_number_verified, users.email_verified AS users_email_verified, users.hashed_password AS users_hashed_password, users.salt AS users_salt, users.is_admin AS users_is_admin, users.created_at AS users_created_at, users.global_banned AS users_global_banned, users.role AS users_role, users.active AS users_active, users.api_key AS users_api_key, users.profile_picture AS users_profile_picture 
+FROM users 
+WHERE users.email = %(email_1)s 
+ LIMIT %(param_1)s]
+[parameters: {'email_1': 'bdd010d01b37fcbf97e2348b546dd8b7da7677797f70d0a51b9ecb3990e592bf', 'param_1': 1}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2023-07-18 09:03:38,503 - ERROR - {"timestamp": "2023-07-18 09:03:38", "route": "/login", "error": "(psycopg2.errors.UndefinedColumn) column users.profile_picture does not exist\nLINE 1: ... AS users_active, users.api_key AS users_api_key, users.prof...\n                                                             ^\n\n[SQL: SELECT users.id AS users_id, users.username AS users_username, users.email AS users_email, users.phone_number AS users_phone_number, users.phone_number_verified AS users_phone_number_verified, users.email_verified AS users_email_verified, users.hashed_password AS users_hashed_password, users.salt AS users_salt, users.is_admin AS users_is_admin, users.created_at AS users_created_at, users.global_banned AS users_global_banned, users.role AS users_role, users.active AS users_active, users.api_key AS users_api_key, users.profile_picture AS users_profile_picture \nFROM users \nWHERE users.email = %(email_1)s \n LIMIT %(param_1)s]\n[parameters: {'email_1': 'bdd010d01b37fcbf97e2348b546dd8b7da7677797f70d0a51b9ecb3990e592bf', 'param_1': 1}]\n(Background on this error at: https://sqlalche.me/e/20/f405)"}
+Traceback (most recent call last):
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1968, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 920, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.UndefinedColumn: column users.profile_picture does not exist
+LINE 1: ... AS users_active, users.api_key AS users_api_key, users.prof...
+                                                             ^
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/jaylen/Projects/IcyNetwork/server/app/api/tools/utils.py", line 81, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/server/app/api/tools/utils.py", line 105, in decorated_function
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/server/app/api/routes.py", line 82, in login
+    user = User.query.filter_by(email=email_hash).first()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/orm/query.py", line 2747, in first
+    return self.limit(1)._iter().first()  # type: ignore
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/orm/query.py", line 2846, in _iter
+    result: Union[ScalarResult[_T], Result[_T]] = self.session.execute(
+                                                  ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2232, in execute
+    return self._execute_internal(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2127, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/orm/context.py", line 293, in orm_execute_statement
+    result = conn.execute(
+             ^^^^^^^^^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1413, in execute
+    return meth(
+           ^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/sql/elements.py", line 483, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1637, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1987, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 2344, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1968, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 920, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.ProgrammingError: (psycopg2.errors.UndefinedColumn) column users.profile_picture does not exist
+LINE 1: ... AS users_active, users.api_key AS users_api_key, users.prof...
+                                                             ^
+
+[SQL: SELECT users.id AS users_id, users.username AS users_username, users.email AS users_email, users.phone_number AS users_phone_number, users.phone_number_verified AS users_phone_number_verified, users.email_verified AS users_email_verified, users.hashed_password AS users_hashed_password, users.salt AS users_salt, users.is_admin AS users_is_admin, users.created_at AS users_created_at, users.global_banned AS users_global_banned, users.role AS users_role, users.active AS users_active, users.api_key AS users_api_key, users.profile_picture AS users_profile_picture 
+FROM users 
+WHERE users.email = %(email_1)s 
+ LIMIT %(param_1)s]
+[parameters: {'email_1': 'bdd010d01b37fcbf97e2348b546dd8b7da7677797f70d0a51b9ecb3990e592bf', 'param_1': 1}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2023-07-18 09:03:38,590 - ERROR - {"timestamp": "2023-07-18 09:03:38", "route": "/login", "error": "(psycopg2.errors.UndefinedColumn) column users.profile_picture does not exist\nLINE 1: ... AS users_active, users.api_key AS users_api_key, users.prof...\n                                                             ^\n\n[SQL: SELECT users.id AS users_id, users.username AS users_username, users.email AS users_email, users.phone_number AS users_phone_number, users.phone_number_verified AS users_phone_number_verified, users.email_verified AS users_email_verified, users.hashed_password AS users_hashed_password, users.salt AS users_salt, users.is_admin AS users_is_admin, users.created_at AS users_created_at, users.global_banned AS users_global_banned, users.role AS users_role, users.active AS users_active, users.api_key AS users_api_key, users.profile_picture AS users_profile_picture \nFROM users \nWHERE users.email = %(email_1)s \n LIMIT %(param_1)s]\n[parameters: {'email_1': 'bdd010d01b37fcbf97e2348b546dd8b7da7677797f70d0a51b9ecb3990e592bf', 'param_1': 1}]\n(Background on this error at: https://sqlalche.me/e/20/f405)"}
+Traceback (most recent call last):
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1968, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 920, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.UndefinedColumn: column users.profile_picture does not exist
+LINE 1: ... AS users_active, users.api_key AS users_api_key, users.prof...
+                                                             ^
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/jaylen/Projects/IcyNetwork/server/app/api/tools/utils.py", line 81, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/server/app/api/tools/utils.py", line 105, in decorated_function
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/server/app/api/routes.py", line 82, in login
+    user = User.query.filter_by(email=email_hash).first()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/orm/query.py", line 2747, in first
+    return self.limit(1)._iter().first()  # type: ignore
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/orm/query.py", line 2846, in _iter
+    result: Union[ScalarResult[_T], Result[_T]] = self.session.execute(
+                                                  ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2232, in execute
+    return self._execute_internal(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2127, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/orm/context.py", line 293, in orm_execute_statement
+    result = conn.execute(
+             ^^^^^^^^^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1413, in execute
+    return meth(
+           ^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/sql/elements.py", line 483, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1637, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1987, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 2344, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1968, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 920, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.ProgrammingError: (psycopg2.errors.UndefinedColumn) column users.profile_picture does not exist
+LINE 1: ... AS users_active, users.api_key AS users_api_key, users.prof...
+                                                             ^
+
+[SQL: SELECT users.id AS users_id, users.username AS users_username, users.email AS users_email, users.phone_number AS users_phone_number, users.phone_number_verified AS users_phone_number_verified, users.email_verified AS users_email_verified, users.hashed_password AS users_hashed_password, users.salt AS users_salt, users.is_admin AS users_is_admin, users.created_at AS users_created_at, users.global_banned AS users_global_banned, users.role AS users_role, users.active AS users_active, users.api_key AS users_api_key, users.profile_picture AS users_profile_picture 
+FROM users 
+WHERE users.email = %(email_1)s 
+ LIMIT %(param_1)s]
+[parameters: {'email_1': 'bdd010d01b37fcbf97e2348b546dd8b7da7677797f70d0a51b9ecb3990e592bf', 'param_1': 1}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2023-07-18 09:03:38,762 - ERROR - {"timestamp": "2023-07-18 09:03:38", "route": "/login", "error": "(psycopg2.errors.UndefinedColumn) column users.profile_picture does not exist\nLINE 1: ... AS users_active, users.api_key AS users_api_key, users.prof...\n                                                             ^\n\n[SQL: SELECT users.id AS users_id, users.username AS users_username, users.email AS users_email, users.phone_number AS users_phone_number, users.phone_number_verified AS users_phone_number_verified, users.email_verified AS users_email_verified, users.hashed_password AS users_hashed_password, users.salt AS users_salt, users.is_admin AS users_is_admin, users.created_at AS users_created_at, users.global_banned AS users_global_banned, users.role AS users_role, users.active AS users_active, users.api_key AS users_api_key, users.profile_picture AS users_profile_picture \nFROM users \nWHERE users.email = %(email_1)s \n LIMIT %(param_1)s]\n[parameters: {'email_1': 'bdd010d01b37fcbf97e2348b546dd8b7da7677797f70d0a51b9ecb3990e592bf', 'param_1': 1}]\n(Background on this error at: https://sqlalche.me/e/20/f405)"}
+Traceback (most recent call last):
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1968, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 920, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.UndefinedColumn: column users.profile_picture does not exist
+LINE 1: ... AS users_active, users.api_key AS users_api_key, users.prof...
+                                                             ^
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/jaylen/Projects/IcyNetwork/server/app/api/tools/utils.py", line 81, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/server/app/api/tools/utils.py", line 105, in decorated_function
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/server/app/api/routes.py", line 82, in login
+    user = User.query.filter_by(email=email_hash).first()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/orm/query.py", line 2747, in first
+    return self.limit(1)._iter().first()  # type: ignore
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/orm/query.py", line 2846, in _iter
+    result: Union[ScalarResult[_T], Result[_T]] = self.session.execute(
+                                                  ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2232, in execute
+    return self._execute_internal(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2127, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/orm/context.py", line 293, in orm_execute_statement
+    result = conn.execute(
+             ^^^^^^^^^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1413, in execute
+    return meth(
+           ^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/sql/elements.py", line 483, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1637, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1987, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 2344, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1968, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/jaylen/Projects/IcyNetwork/.venv/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 920, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.ProgrammingError: (psycopg2.errors.UndefinedColumn) column users.profile_picture does not exist
+LINE 1: ... AS users_active, users.api_key AS users_api_key, users.prof...
+                                                             ^
+
+[SQL: SELECT users.id AS users_id, users.username AS users_username, users.email AS users_email, users.phone_number AS users_phone_number, users.phone_number_verified AS users_phone_number_verified, users.email_verified AS users_email_verified, users.hashed_password AS users_hashed_password, users.salt AS users_salt, users.is_admin AS users_is_admin, users.created_at AS users_created_at, users.global_banned AS users_global_banned, users.role AS users_role, users.active AS users_active, users.api_key AS users_api_key, users.profile_picture AS users_profile_picture 
+FROM users 
+WHERE users.email = %(email_1)s 
+ LIMIT %(param_1)s]
+[parameters: {'email_1': 'bdd010d01b37fcbf97e2348b546dd8b7da7677797f70d0a51b9ecb3990e592bf', 'param_1': 1}]
+(Background on this error at: https://sqlalche.me/e/20/f405)

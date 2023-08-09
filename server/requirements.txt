@@ -1,0 +1,11 @@
+flask
+flask_wtf
+flask_bcrypt
+flask_sqlalchemy
+flask_cors
+flask_limiter
+flask_jwt_extended
+gunicorn
+psycopg2-binary
+requests
+python-dotenv

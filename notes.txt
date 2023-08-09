@@ -1,0 +1,63 @@
+how to set a cookie in js
+
+const myCookieToken = useCookie('myCookieToken', {
+  maxAge: 60 * 60 * 24 * 7,
+  sameSite: 'Strict',
+})
+
+
+Resources:
+  https://matrix-org.github.io/matrix-python-sdk/matrix_client.html
+  ELK LOGGING https://www.youtube.com/watch?v=_EnyrFKF4K4
+
+
+BUGS:
+- [0] When composed a docker is not fetching the api's correctly (maybe a problem with the nuxt.config.ts and env variables)
+- [0] For the login fix the login error message system. When logging in properly the error message is still popping up
+
+
+TODO:
+- [0] Break down the components into smaller components (e.g. api fetching)
+- [0] Add EKL logging
+- [0] Work on the logging system
+- [0] Better Design
+- [0] Fix the double sidebar menu
+- [0] Load everything for .env for easy access
+- [0] Dark, Light mode switch/ themes (Store with cookie maybe?)
+- [0] Design the default page by adding a footer, header, sidebar and navbar.
+- [0] Clean up the pages and store everything in the components folder
+- [0] Covert everything to typescript and tailwinds
+- [0] Remove the style and script code to put them in there own files
+- [0] Email server for email confirmation
+
+
+TOADD:
+- [0] Add a admin portal/ page (
+  - user management system
+  - data base management
+  - analytics
+  - content management system
+  - moderation system
+  - settings and configuration
+  - back up and restore
+  - notifications and alert system
+  - audit logs
+)
+- [0] Add a profile management page (
+  - change password
+  - change email
+  - change username
+  - change profile picture
+  - change theme
+  - change language (maybe)
+  - change timezone (maybe)
+  - change country (maybe)
+  - privacy settings
+  - 2FA/ Oauth
+)
+- [0] Add a content data collection system (Can be opted out on) (
+  - collect everything from the user (e.g what they visited, what they clicked on, what they searched for, what they bought, etc.)
+)
+
+https://i.imgur.com/6WYy6No.png
+https://i.imgur.com/OOuaQd1.png

@@ -1,0 +1,56 @@
+# Flask App .gitignore
+
+# Python-related
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+.venv/
+env/
+
+# IDE-specific
+.vscode/
+
+# Logs
+*.log
+
+# Dependency directories
+node_modules/
+bower_components/
+
+# Compiled files
+*.pyc
+*.pyo
+*.class
+*.pyd
+*.pyi
+*.swp
+*.o
+*.lo
+*.la
+*.dll
+*.exe
+*.img
+*.out
+
+# Editor-specific files
+*~
+
+# Environment-specific files
+.env
+.env.*
+.env.local
+.env.dev
+.env.prod
+
+# Ignore any sensitive or secret information
+config.ini
+secrets.ini
+secrets.py
+secrets.json
+
+
+# others
+testing/
