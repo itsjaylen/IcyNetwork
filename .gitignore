@@ -54,3 +54,7 @@ secrets.json
 
 # others
 testing/
+*.db
+*.sqlite3
+*.sql
+database/data
